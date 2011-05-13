@@ -25,14 +25,14 @@ module Netzke
 
           # Generate dynamic assets and put them into public/netzke
           require 'fileutils'
-          FileUtils.mkdir_p(Rails.root.join('public', 'netzke'))
+          FileUtils.mkdir_p(Rails.root.join('tmp', 'netzke'))
 
           dynamic_assets.each do |asset|
-            File.open(Rails.root.join('public', 'netzke', asset), 'w') {|f| f.write(Netzke::Core::DynamicAssets.send(asset.sub(".", "_"))) }
+            File.open(Rails.root.join('tmp', 'netzke', asset), 'w') {|f| f.write(Netzke::Core::DynamicAssets.send(asset.sub(".", "_"))) }
           end
         else
           dynamic_assets.each do |asset|
-            file_path = Rails.root.join('public', 'netzke', asset)
+            file_path = Rails.root.join('tmp', 'netzke', asset)
             File.delete(file_path) if File.exists?(file_path)
           end
         end
